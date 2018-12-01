@@ -1,0 +1,17 @@
+extends layoutUsers
+body  
+    block content
+        .BarraSup
+            #sup.navbar.navbar-dark.bg-dark
+                .title
+                img(src='/image/logo.png')
+                h2 UCACloud
+        div.lel
+            form.f(action='' method='post' name="FConfig")
+                h2.ei Complete el campos si desea cambiar su configuracion
+                input#nombre.form-control.mr-sm-2(type='text', name='nombre', placeholder='Username', d='')
+                //input#password.form-control.mr-sm-2(type='password', name='password', placeholder='Password')
+                input.lol#reg.btn.btn-outline-dark(type='button', name='enviar', onclick="location.href='/users/profile/#{JSON.parse(session.user).userId}';", value='Regresar')
+                input.lol#reg.btn.btn-outline-dark(type='submit', name='enviar', value='Guardar cambios')
+                input(type='text', style='display:none', value=JSON.parse(session.user).userId, name='id')
+        script(src="/javascripts/configuser.js")
