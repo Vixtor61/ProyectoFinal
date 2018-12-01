@@ -1,0 +1,46 @@
+extends layoutUsers
+body 
+  block content
+  
+    .BarraSup
+      .navbar.navbar-dark.bg-dark
+        .title
+            img(src='/image/logo.png')
+            h2 UCACloud
+        .btn-group(role='group', aria-label='Basic example')
+          button.btn.btn-secondary(type='button') Crear Nuevo Usuario Admin
+          button.btn.btn-secondary(type='button') #{user} Configuracion
+          button.btn.btn-secondary(type='button', onclick="location.href='/users/logout';") Cerrar sesion
+    .contentAdmin
+      .cont_inf
+        table.table.table-dark.table-hover
+          thead
+            tr
+              th(scope='col') Nombre
+              th(scope='col') Correo
+              th(scope='col') Capacidad
+              th(scope='col') Tipo
+              th(scope='col') Activo
+              th(scope='col') 
+          tbody
+            each value, index in users 
+              tr
+                td #{value.nombre}
+                td #{value.correo}
+                td #{value.capacidad}
+                td #{value.tipo}
+                td #{value.activo} 
+                td 
+                  form.d-flex.justify-content-end(action='/admin/perf_editar/'+value.id+'/#{JSON.parse(session.user).userId}', method='post' ,id='modf')
+                    input#tamanhio7.form-control.mr-sm-2(type='number', name='capacidad', min='1024', max='5000', placeholder='Capacidad')
+                    select(name='opts')
+                      option(value='activar') Activar
+                      option(value='desactivar') Desactivar
+                    input(type='submit',value="Modificar") 
+
+
+    footer
+      .fixed-bottom
+        .card.text-center
+          .card-footer.text-muted
+            | UCACloud
