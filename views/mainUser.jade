@@ -1,0 +1,113 @@
+extends layoutUsers
+body
+  block content
+    .BarraSup
+        #sup.navbar.navbar-dark.bg-dark
+          .title
+            img(src='/image/logo.png')
+            h2 UCACloud
+          .login
+            .btn-group(role='group', aria-label='Basic example')
+              button.btn.btn-secondary(type='button') Compartir
+              button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                | To-Do
+              button.btn.btn-secondary(type='button', onclick="location.href='/users/config/';") Configurar, #{user}
+              button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalCenter1')
+                | Cargar Archivo
+              button.btn.btn-secondary(type='button', onclick="location.href='/users/logout';") Cerrar sesion
+    .contentUser        
+      .cont_inf
+        table.table.table-dark.table-hover
+          thead
+            tr
+              th(scope='col') #
+              th(scope='col') Alias
+              th(scope='col') Download
+              th(scope='col') Tipo
+              th(scope='col') Peso
+          tbody
+            each value, index in archivos 
+              tr
+                td #{index}
+                td #{value.alias}
+                td
+                  a(href='/upload/#{value.nombre}', download="#{value.nombre}")  Descargar 
+                td 
+                  i(class="#{value.icono}") 
+                td #{value.peso.toFixed(2)}MB
+                td 
+                  a(href='/users/archivo/delete/#{user}/#{value.nombre}/#{usrid}') Eliminar
+
+    //- ventanitas_modales to_do_list
+    .todo
+        // Button trigger modal
+        // Modal3
+        #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+              .modal-header
+                
+                h5#exampleModalCenterTitle.modal-title To-Do-Lists
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') &times;
+              .modal-body
+                table.table
+                  thead.thead-dark
+                    tr
+                      th(scope='col') #
+                      th(scope='col') Accion
+                      th(scope='col') Prioridad
+                  tbody
+                    tr
+                      th(scope='row') 1
+                      td accion 1
+                      td alta
+                      td
+                        .btn-group(role='group', aria-label='Basic example')
+                          // Button trigger modal
+                          button.btn.btn-primary(type='button', data-toggle='modal', data-target='#exampleModalLong')
+                            | Editar
+                          // Modal
+                          #exampleModalLong.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLongTitle', aria-hidden='true')
+                            .modal-dialog(role='document')
+                              .modal-content
+                                .modal-header
+                                  h5#exampleModalLongTitle.modal-title Modal title
+                                  button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    span(aria-hidden='true') &times;
+                                .modal-body
+                                  input#todoEdit.form-control.mr-sm-2(type='text', name='todoEdit')
+                                .btn-group.btn-group-toggle(data-toggle='buttons')
+                                  label.btn.btn-secondary.active
+                                    input#option1(type='radio', name='options', autocomplete='off', checked='')
+                                    |  Prioridad Alta
+                                  label.btn.btn-secondary
+                                    input#option2(type='radio', name='options', autocomplete='off')
+                                    |  Prioridad Baja
+                                .modal-footer
+                                  button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                  button.btn.btn-primary(type='button') Save changes
+                          button.btn.btn-secondary(type='button') Eliminar
+              .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Cerrar
+                button.btn.btn-primary(type='button') A&ntilde;adir
+      
+      #exampleModalCenter1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+              .modal-header
+                
+                h5#exampleModalCenterTitle.modal-title Subir Archivos
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') &times;
+              .modal-body
+                  h2 Subir archivos
+                  form#fileinput(ref='input', action='/users/archivo/#{JSON.parse(session.user).userId}', method='post', enctype='multipart/form-data')
+                    input(type='file', name='input')
+                    input(type='submit', value='Upload!')
+
+    footer
+      .fixed-bottom
+        .card.text-center
+          .card-footer.text-muted
+            | UCACloud

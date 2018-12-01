@@ -1,0 +1,10 @@
+extends layout
+block content    
+    h1 profile
+    ul
+        li
+            a(href="/") Inicio
+        li
+            a(href="/users/logout") salir
+    p Email : #{JSON.parse(session.user).email}
+    p Password : #{JSON.parse(session.user).password}                
