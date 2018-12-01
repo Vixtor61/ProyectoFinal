@@ -1,0 +1,67 @@
+extends layoutLogin
+body
+  block content
+    .BarraSup
+      #sup.navbar.navbar-dark.bg-dark
+        .title
+          img(src='/image/logo.png')
+          h2 UCACloud
+        .login
+        div= err
+        form.d-flex.justify-content-end(action='/users/signin', method='post')
+          input#email.form-control.mr-sm-2(type='email', name='correo', placeholder='abgh@correo.com', pattern='^[^@]+@[^@]+.[a-zA-Z]{2,}$', required='')
+          input#password.form-control.mr-sm-2(type='password', name='password', placeholder='password', required='')
+          input#inicio.btn.btn-outline-light(type='submit', value='Enviar')
+     .content 
+      .contIzq
+        div
+          .card(style='width: 18rem;')
+            img.card-img-top(src='/image/cloud1.jpg', alt='Card image cap')
+            .card-body
+              h5.card-title UCACloud
+              p.card-text
+                | UCACloud es un gestor de archivo que te permite acceder a tus archivos estes donde estes.
+        div
+          .card(style='width: 18rem;')
+            img.card-img-top(src='/image/cloud1.jpg', alt='Card image cap')
+            .card-body
+              h5.card-title Que ofrecemos?
+              p.card-text
+                | UCACloud esta orientado a los estudiantes. nuestro objetivo es ofreces servicios utiles a los estudiantes.
+      .contDer
+        form.registro(action='/users/signup', method='post')
+          input#nombre.form-control.mr-sm-2(type='text', name='nombre', placeholder='Nombre', required='')
+          //input#apellido.form-control.mr-sm-2(type='text', name='lastname', placeholder='Apellido', required='')
+          input#email.form-control.mr-sm-2(type='email', name='correo', placeholder='abgh@correo.com', pattern='^[^@]+@[^@]+.[a-zA-Z]{2,}$', required='')
+          input#passwordr.form-control.mr-sm-2(type='password', name='password', placeholder='Password', required='')
+          input#cpass.form-control.mr-sm-2(type='password', name='cpass', placeholder='Confirmar Password', required='')
+          input#reg.btn.btn-outline-dark(type='submit', name='enviar', value='Register')
+    hr
+    footer
+      .card.text-center.text-white.bg-dark.mb-3
+        .card-header Enlaces Externos
+        .card-body
+          .d-flex.justify-content-center
+            #card.card.text-white.bg-secondary.mb-3(style='width: 18rem;')
+              .card-body
+                #icon.div 
+                  i.fab.fa-github
+                h5.card-title GitHub
+                p.card-text
+                  | Si quieres unirte a nuestro equipo de desarroladores da click en el siguiente enlace.
+                a.btn.btn-primary(href='#') Click Me!
+            #card.card.text-white.bg-secondary.mb-3(style='width: 18rem;')
+              .card-body
+                #icon.div 
+                  i.fas.fa-home
+                h5.card-title DEI
+                p.card-text Regresa a la pagina principal del DEI
+                a.btn.btn-primary(href='#') Click Me!
+            #card.card.text-white.bg-secondary.mb-3(style='width: 18rem;')
+              .card-body
+                #icon.div 
+                  i.fab.fa-facebook-f
+                h5.card-title Facebook
+                p.card-text
+                  | Visita nuestra pagina de facebook para enterarte de los cambios a realizar en las siguientes versiones ;).
+                a.btn.btn-primary(href='#') Click Me!
